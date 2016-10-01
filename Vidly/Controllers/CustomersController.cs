@@ -28,9 +28,11 @@ namespace Vidly.Controllers
             return View(viewModel);
         }
         [HttpPost]
-        public ActionResult Create(NewCustomerViewModel viewModel)
+        public ActionResult Create(Customer customer)
         {
-            return View();
+            _context.Customers.Add(customer);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Customer");
         }
         public ViewResult Index()
         {
