@@ -239,6 +239,10 @@
     <Compile Include="Migrations\201610010549524_AddBirthDateToCustomer1.Designer.cs">
       <DependentUpon>201610010549524_AddBirthDateToCustomer1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610010608596_AddNullToBirthDate.cs" />
+    <Compile Include="Migrations\201610010608596_AddNullToBirthDate.Designer.cs">
+      <DependentUpon>201610010608596_AddNullToBirthDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -360,6 +364,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610010549524_AddBirthDateToCustomer1.resx">
       <DependentUpon>201610010549524_AddBirthDateToCustomer1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610010608596_AddNullToBirthDate.resx">
+      <DependentUpon>201610010608596_AddNullToBirthDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
