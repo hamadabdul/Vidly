@@ -4,6 +4,8 @@ using Vidly.Models;
 using Vidly.ViewModels;
 using System.Data.Entity;
 using System.Linq;
+using Vidly.Migrations;
+using System;
 
 namespace Vidly.Controllers
 {
@@ -19,6 +21,55 @@ namespace Vidly.Controllers
         protected override void Dispose(bool disposing)
         {
             _context.Dispose();    
+        }
+
+        public ActionResult New()
+        {
+            var genres = _context.Genres.ToList();
+
+            var viewModel = new MovieFormViewModel()
+            {
+                Genres = genres
+            };
+            return View("MovieForm",viewModel);
+        }
+        [HttpPost]
+   
+        public ActionResult Edit(int id)
+        {
+            var movie = _context.Movies.SingleOrDefault(c => c.Id == id);
+
+            if (movie == null)
+                return HttpNotFound();
+
+            var viewModel = new MovieFormViewModel()
+            {
+                Movie = movie,
+                Genres = _context.Genres.ToList()
+            };
+            return View("MovieForm", viewModel);
+            
+        }
+
+        public ActionResult Save(Movie movie)
+        {
+            if (movie.Id == 0)
+            {
+                movie.DateAdded = DateTime.Now;
+                _context.Movies.Add(movie);
+            }
+            else
+            {
+                var moviesInDb = _context.Movies.Single(c => c.Id == movie.Id);
+
+                moviesInDb.Name = movie.Name;
+                moviesInDb.GenreId = movie.GenreId;
+                moviesInDb.NumberInStock = movie.NumberInStock;
+                moviesInDb.ReleaseDate = movie.ReleaseDate;
+                
+            }
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Movies");
         }
         public ViewResult Index()
         {
