@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Linq;
 using Vidly.Migrations;
 using System;
+using System.Data.Entity.Validation;
 
 namespace Vidly.Controllers
 {
@@ -33,7 +34,7 @@ namespace Vidly.Controllers
             };
             return View("MovieForm",viewModel);
         }
-        [HttpPost]
+        
    
         public ActionResult Edit(int id)
         {
@@ -51,6 +52,9 @@ namespace Vidly.Controllers
             
         }
 
+
+      
+        [HttpPost]
         public ActionResult Save(Movie movie)
         {
             if (movie.Id == 0)
@@ -68,7 +72,9 @@ namespace Vidly.Controllers
                 moviesInDb.ReleaseDate = movie.ReleaseDate;
                 
             }
-            _context.SaveChanges();
+           
+                _context.SaveChanges();
+           
             return RedirectToAction("Index", "Movies");
         }
         public ViewResult Index()
